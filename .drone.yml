@@ -5,7 +5,10 @@ name: default
 
 steps:
   - name: npm install
-    image: nodeT
+    image: node:13.10.1
+    volumes:
+      - name: cache
+      path: .yarn-cache
     commands:
       - node -v
       - npm -v
@@ -13,3 +16,7 @@ steps:
       - yarn config set cache-folder .yarn-cache
       - yarn install
       - yarn run build
+volumes:
+  - name: cache
+    host:
+      path: /data/traefik/.yarn-cache
