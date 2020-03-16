@@ -5,7 +5,7 @@ name: default
 
 steps:
   - name: npm install
-    image: node:13.10.1
+    image: nodeT
     commands:
       - node -v
       - npm -v
