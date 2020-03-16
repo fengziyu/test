@@ -13,7 +13,7 @@ steps:
       - node -v
       - npm -v
       - yarn --version
-      - yarn config set cache-folder .yarn-cache
+      - yarn config set cache-folder /.yarn-cache
       - yarn install
       - yarn run build
 volumes:
