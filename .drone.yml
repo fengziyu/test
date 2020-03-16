@@ -5,7 +5,7 @@ name: default
 
 steps:
   - name: npm install
-    image: node:10.16
+    image: node
     commands:
       - node -v
       - npm -v
