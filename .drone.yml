@@ -4,7 +4,7 @@ type: docker
 name: default
 
 steps:
-  - name: npm install
+  - name: install
     image: node:13.10.1
     volumes:
       - name: cache
@@ -15,6 +15,9 @@ steps:
       - yarn --version
       - yarn config set cache-folder /.yarn-cache
       - yarn install
+  - name: build
+    image: node:13.10.1
+    commands:
       - yarn run build
 volumes:
   - name: cache
