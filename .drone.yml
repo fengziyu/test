@@ -38,6 +38,29 @@ steps:
         - default.conf
       rm: true
 
+  - name: ssh
+    image: appleboy/drone-ssh
+    settings:
+      host:
+        from_secret: host
+      username:
+        from_secret: username
+      password:
+        from_secret: password    
+      script:
+        - cd /data/dockerImage/vue
+        - >
+          docker build -t vue . &&
+          docker rm -f vue &&
+          docker run -d
+            --net=web
+            --name=vue
+            --label="traefik.docker.network=web"
+            --label="traefik.enable=true"
+            --label="traefik.http.routers.hephaestus-web.rule=Host(\`vue.zhangxiansong.top\`)"
+            --label="traefik.http.routers.hephaestus-web.priority=5"
+            --label="traefik.http.routers.hephaestus-web.entrypoints=web"
+            vue
 
 volumes:
   - name: cache
