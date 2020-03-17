@@ -15,10 +15,30 @@ steps:
       - yarn --version
       - yarn config set cache-folder /.yarn-cache
       - yarn install
+
   - name: build
     image: node:13.10.1
     commands:
       - yarn run build
+
+  - name: scp files
+    image: appleboy/drone-scp
+    settings:
+      host:
+        from_secret: host
+      username:
+        from_secret: username
+      password:
+        from_secret: password
+      target: /data/dockerImage/vue
+      source:
+        - dist
+        - !dist/*.map
+        - Dockerfile
+        - default.conf
+      rm: true
+
+
 volumes:
   - name: cache
     host:
