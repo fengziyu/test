@@ -8,5 +8,5 @@ RUN yarn build
 FROM nginx:alpine
 EXPOSE 80
 WORKDIR /
-COPY /app/dist /usr/share/nginx/html
+COPY --from=hook /app/dist /usr/share/nginx/html
 COPY /app/default.conf /etc/nginx/conf.d
