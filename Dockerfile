@@ -1,4 +1,4 @@
-FROM node:13.10.1
+FROM node as build
 WORKDIR /app
 COPY package.json yarn.lock /app/
 RUN yarn
@@ -8,5 +8,5 @@ RUN yarn build
 FROM nginx:alpine
 EXPOSE 80
 WORKDIR /
-COPY --from=hook /app/dist /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 COPY /app/default.conf /etc/nginx/conf.d
