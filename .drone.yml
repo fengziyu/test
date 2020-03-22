@@ -6,6 +6,14 @@ name: default
 steps:
   - name: pubilsh
     image: plugins/docker
+    volumes:
+      - name: docker.sock
+        path: /var/run/docker.sock
     settings:
       repo: hub.fengziyu.top/vue
       tags: latest
+
+volumes:
+  - name: docker.sock
+    host:
+      path: /var/run/docker.sock
