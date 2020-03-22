@@ -9,4 +9,4 @@ FROM nginx:alpine
 EXPOSE 80
 WORKDIR /
 COPY --from=build /app/dist /usr/share/nginx/html
-COPY /app/default.conf /etc/nginx/conf.d
+COPY --from=build /app/default.conf /etc/nginx/conf.d
