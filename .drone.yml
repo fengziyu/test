@@ -11,7 +11,7 @@ steps:
         path: /var/run/docker.sock
     settings:
       repo: hub.fengziyu.top/vue
-      tags: latest
+      tags: 1.0.0
 
   - name: deployment
     image: appleboy/drone-ssh
