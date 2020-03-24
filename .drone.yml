@@ -23,17 +23,9 @@ steps:
       password:
         from_secret: password   
       script:
-        - >
-          docker run -d
-          --net=web
-          --name=vue
-          --label="traefik.docker.network=web"
-          --label="traefik.enable=true"
-          --label="traefik.http.routers.vue-web.rule=Host(\`vue.zhangxiansong.top\`)"
-          --label="traefik.http.routers.vue-web.priority=5"
-          --label="traefik.http.routers.vue-web.entrypoints=web"
-          hub.fengziyu.top/vue  
-
+        - cd /data/deploy
+        - sh vue.sh
+           
 volumes:
   - name: docker.sock
     host:

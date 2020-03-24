@@ -1,7 +1,8 @@
 FROM node as build
 WORKDIR /app
 COPY package.json yarn.lock /app/
-RUN yarn
+COPY /data/traefik/.yar-cache /.yarn-cache
+RUN yarn config set cache-folder /.yarn-cache && yarn
 COPY . .
 RUN yarn build
 
