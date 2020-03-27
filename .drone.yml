@@ -4,29 +4,15 @@ type: docker
 name: default
 
 steps:
-  - name: pubilsh
-    image: plugins/docker
-    volumes:
-      - name: docker.sock
-        path: /var/run/docker.sock
-    settings:
-      repo: hub.fengziyu.top/vue
-      tags: 1.0.0
+  - name: install
+    image: node:13.10.1
+    commands:
+      - node -v
+      - npm -v
+      - yarn --version
+      - yarn install
 
-  - name: deployment
-    image: appleboy/drone-ssh
-    settings:
-      host:
-        from_secret: host
-      username:
-        from_secret: username
-      password:
-        from_secret: password   
-      script:
-        - cd /data/deploy
-        - sh vue.sh
-           
-volumes:
-  - name: docker.sock
-    host:
-      path: /var/run/docker.sock
+  - name: build
+    image: node:13.10.1
+    commands:
+      - yarn run build
